@@ -11,8 +11,8 @@ export default class Aluno extends BaseModel {
   public email: string
   @column ()
   public matricula: string
-  @column ()
-  public nascimento: Date
+  @column.dateTime()
+  public dataNascimento: DateTime
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
