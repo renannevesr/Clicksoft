@@ -18,5 +18,19 @@ export default class AlunosController {
 
         return{ data:alunos }
         }
-        
+    public async show({params}: HttpContextContract){
+        const aluno = await Aluno.findOrFail(params.id)
+        return{ 
+            data: aluno
+        }
+    }
+    public async destroy({params}: HttpContextContract){
+        const aluno = await Aluno.findOrFail(params.id)
+        await aluno.delete()
+        return{ 
+            message: "Aluno excluido com sucesso",
+            data: aluno
+        }
+
+    }
     }
