@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column,beforeSave } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Aluno extends BaseModel {
   @column({ isPrimary: true })
@@ -10,7 +10,7 @@ export default class Aluno extends BaseModel {
   @column ()
   public email: string
   @column ()
-  public matricula: string
+  public matricula: number
   @column.dateTime()
   public data_nascimento: DateTime
 
@@ -19,4 +19,11 @@ export default class Aluno extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+  @beforeSave()
+  public static async incrementMatricula(aluno: Aluno) {
+    if (!aluno.matricula) {
+      const lastAluno = await Aluno.query().orderBy('matricula', 'desc').first()
+      aluno.matricula = lastAluno ? lastAluno.matricula + 1 : 1
+    }
+  }
 }

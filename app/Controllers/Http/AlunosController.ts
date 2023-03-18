@@ -18,15 +18,21 @@ export default class AlunosController {
 
         return{ data:alunos }
         }
-    public async show({params}: HttpContextContract){
-        const aluno = await Aluno.findOrFail(params.id)
+    public async show({params,response}: HttpContextContract){
+        const aluno = await Aluno.find(params.id)
+        if (!aluno){
+            return response.notFound ({ message: 'Aluno não existe.'})
+        }
         return{ 
             data: aluno
         }
     }
 
-    public async destroy({params}: HttpContextContract){
-        const aluno = await Aluno.findOrFail(params.id)
+    public async destroy({params,response}: HttpContextContract){
+        const aluno = await Aluno.find(params.id)
+        if (!aluno){
+            return response.notFound ({ message: 'Aluno não existe.'})
+        }
         await aluno.delete()
         return{ 
             message: "Aluno excluido com sucesso",
@@ -35,9 +41,12 @@ export default class AlunosController {
 
     }
 
-    public async update({params, request}: HttpContextContract){
+    public async update({params, request,response}: HttpContextContract){
         const body = request.body()
-        const aluno = await Aluno.findOrFail(params.id)
+        const aluno = await Aluno.find(params.id)
+        if (!aluno){
+            return response.notFound ({ message: 'Aluno não existe.'})
+        }
         aluno.nome = body.nome
         aluno.email = body.email
         aluno.matricula = body.matricula
