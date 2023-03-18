@@ -24,6 +24,7 @@ export default class AlunosController {
             data: aluno
         }
     }
+
     public async destroy({params}: HttpContextContract){
         const aluno = await Aluno.findOrFail(params.id)
         await aluno.delete()
@@ -33,4 +34,23 @@ export default class AlunosController {
         }
 
     }
+
+    public async update({params, request}: HttpContextContract){
+        const body = request.body()
+        const aluno = await Aluno.findOrFail(params.id)
+        aluno.nome = body.nome
+        aluno.email = body.email
+        aluno.matricula = body.matricula
+        aluno.data_nascimento = body.data_nascimento
+        await aluno.save()
+
+        return{
+            message: "Aluno atualizado com sucesso!",
+            data : aluno,
+        }
+
+
+    }
+
+
     }
