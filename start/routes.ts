@@ -20,10 +20,9 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 Route.group(()=> {
-  Route.get('/', async () => {
-    return { hello: 'world' }
-  })
-  
-  
+  Route.resource('/alunos', 'AlunosController').apiOnly()
+  Route.resource('/alocacoes', 'AlocacoesController').apiOnly()
+  Route.resource('/professores', 'ProfessoresController').apiOnly()
+  Route.resource('/salas', 'SalasController').apiOnly()
 }).prefix('/api')
 
