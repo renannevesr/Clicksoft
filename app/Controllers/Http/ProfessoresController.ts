@@ -5,7 +5,11 @@ export default class ProfessoresController {
      public async store({request, response}: HttpContextContract){
 
         const body = request.body()
-        const professor = await Professor.create(body)
+        console.log(body)
+        /*const professor = await Professor.create(body)*/
+        const data = request.only(['nome', 'email', 'data_nascimento'])
+        console.log(data)
+        const professor = await Professor.create(data)
         response.status(201)
 
         return{
