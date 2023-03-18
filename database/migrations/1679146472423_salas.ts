@@ -7,9 +7,9 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
 
-      table.string('numero_sala').notNullable().unique()
+      table.string('numero').notNullable().unique()
       table.integer('capacidade_alunos').notNullable()
-      table.boolean('disponibilidade').notNullable()
+      table.boolean('disponibilidade').notNullable().defaultTo(true)
       table.integer('professor_id').unsigned().references('id').inTable('professores').onDelete('CASCADE')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

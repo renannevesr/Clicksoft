@@ -13,7 +13,7 @@ export default class Sala extends BaseModel {
   @column ()
   public disponibilidade: boolean
   @column ()
-  public professor_id: number
+  public professorId: number
   @belongsTo(() => Professor)
   public professor: BelongsTo<typeof Professor>
 
