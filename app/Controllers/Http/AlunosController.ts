@@ -13,5 +13,10 @@ export default class AlunosController {
             data: aluno,
         }
     }
+    public async  index() {
+        const alunos = await Aluno.all()
 
-}
+        return{ data:alunos }
+        }
+        
+    }
