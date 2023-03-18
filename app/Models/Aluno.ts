@@ -12,7 +12,7 @@ export default class Aluno extends BaseModel {
   @column ()
   public matricula: string
   @column.dateTime()
-  public dataNascimento: DateTime
+  public data_nascimento: DateTime
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
