@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string('nome').notNullable()
       table.string('email').notNullable()
       table.string('matricula').notNullable()
-      table.date('dataNascimento').notNullable()
+      table.date('data_nascimento').notNullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
