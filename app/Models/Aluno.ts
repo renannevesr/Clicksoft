@@ -29,11 +29,11 @@ export default class Aluno extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-  @beforeSave()
+  /*@beforeSave()
   public static async incrementMatricula(aluno: Aluno) {
     if (!aluno.matricula) {
       const lastAluno = await Aluno.query().orderBy('matricula', 'desc').first()
       aluno.matricula = lastAluno ? lastAluno.matricula + 1 : 1
     }
-  }
+  }*/
 }

@@ -18,13 +18,14 @@ export default class Professor extends BaseModel {
   public salas: HasMany<typeof Sala>
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+  /*
   @beforeSave()
   public static async incrementMatricula(professor: Professor) {
     if (!professor.matricula) {
       const lastProfessor = await Professor.query().orderBy('matricula', 'desc').first()
       professor.matricula = lastProfessor ? lastProfessor.matricula + 1 : 1
     }
-  }
+  }*/
 
   static get table() {
     return 'professores'

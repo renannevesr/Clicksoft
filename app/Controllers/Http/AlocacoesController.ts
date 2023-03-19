@@ -24,7 +24,9 @@ export default class AlocacoesController {
     if (!aluno) {
       return response.notFound({ message: 'Aluno não encontrado.' })
     }
-
+    if (!sala.disponibilidade) {
+      return response.badRequest({ message: 'A sala não está disponível.' })
+    }
     if (sala.alunos.find((a) => a.id === aluno.id)) {
       return response.badRequest({ message: 'O aluno já está alocado nesta sala.' })
     }
@@ -35,7 +37,7 @@ export default class AlocacoesController {
 
     await sala.related('alunos').attach([aluno.id])
 
-    return response.status(201).send(sala)
+    return response.status(200).send({ message: 'Aluno alocado com sucesso' })
   }
   public async indexSalas({ params, response }: HttpContextContract) {
     const aluno = await Aluno.query()

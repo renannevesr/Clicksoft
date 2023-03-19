@@ -4,7 +4,7 @@ import Professor from 'App/Models/Professor'
 
 export default class SalaController {
   public async store({ response, request }: HttpContextContract) {
-    const data = request.only(['numero', 'capacidade_alunos', 'idProfessor'])
+    const data = request.body()
     const professor = await Professor.find(data.idProfessor)
     if (!professor) {
       return response.notFound({ message: 'Professor não existe.' })
@@ -12,6 +12,7 @@ export default class SalaController {
     const sala = new Sala()
     sala.numero = data.numero
     sala.capacidade_alunos = data.capacidade_alunos
+    sala.disponibilidade = data.disponibilidade
     await professor.related('salas').save(sala)
     return response.status(201).send(sala)
   }
