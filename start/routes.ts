@@ -29,4 +29,5 @@ Route.group(() => {
     '/alocacoes/:idAluno/salas/:idSala/professores/:idProfessor',
     'AlocacoesController.remove'
   )
+  Route.get('/alocacoes/:idSala/alunos', 'AlocacoesController.indexAlunos')
 }).prefix('/api')

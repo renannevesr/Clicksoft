@@ -40,14 +40,24 @@ export default class AlocacoesController {
   public async indexSalas({ params, response }: HttpContextContract) {
     const aluno = await Aluno.query()
       .where('id', params.id)
-      .preload('salas', (query) => query.where('disponibilidade', true))
+      .preload('salas', (query) => query.where('disponibilidade', true).preload('professor'))
       .first()
 
     if (!aluno) {
       return response.notFound({ message: 'Aluno não encontrado.' })
     }
+    const salas = aluno.salas.map((sala) => {
+      return {
+        numero: sala.numero,
+        professor: sala.professor.nome,
+      }
+    })
 
-    return aluno.salas
+    return {
+      nomeAluno: aluno.nome,
+      salas: salas,
+    }
+    // return aluno.salas
   }
 
   public async remove({ response, params }: HttpContextContract) {
@@ -75,6 +85,16 @@ export default class AlocacoesController {
 
     await sala.related('alunos').detach([aluno.id])
 
-    return response.status(204)
+    return response.status(200).send({ message: 'Aluno removido da sala.' })
+  }
+  public async indexAlunos({ response, params }: HttpContextContract) {
+    const { idSala } = params
+    const sala = await Sala.query().where('id', idSala).preload('alunos').first()
+
+    if (!sala) {
+      return response.notFound({ message: 'Sala não encontrada.' })
+    }
+
+    return sala.alunos
   }
 }
