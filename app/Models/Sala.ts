@@ -25,6 +25,10 @@ export default class Sala extends BaseModel {
   public professor: BelongsTo<typeof Professor>
 
   @manyToMany(() => Aluno, {
+    localKey: 'id',
+    pivotForeignKey: 'sala_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'aluno_id',
     pivotTable: 'alocacoes',
     pivotTimestamps: true,
   })

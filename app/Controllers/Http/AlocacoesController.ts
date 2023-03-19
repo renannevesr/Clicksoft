@@ -37,4 +37,17 @@ export default class AlocacoesController {
 
     return response.status(201).send(sala)
   }
+
+  public async indexSalas({ params, response }: HttpContextContract) {
+    const aluno = await Aluno.query()
+      .where('id', params.id)
+      .preload('salas', (query) => query.where('disponibilidade', true))
+      .first()
+
+    if (!aluno) {
+      return response.notFound({ message: 'Aluno não encontrado.' })
+    }
+
+    return aluno.salas
+  }
 }
