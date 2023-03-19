@@ -1,14 +1,14 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column ,hasMany,HasMany,beforeSave} from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, hasMany, HasMany, beforeSave } from '@ioc:Adonis/Lucid/Orm'
 import Sala from './Sala'
 export default class Professor extends BaseModel {
   @column({ isPrimary: true })
   public id: number
-  @column ()
+  @column()
   public nome: string
-  @column ()
+  @column()
   public email: string
-  @column ()
+  @column()
   public matricula: number
   @column.dateTime()
   public data_nascimento: DateTime
@@ -25,8 +25,8 @@ export default class Professor extends BaseModel {
       professor.matricula = lastProfessor ? lastProfessor.matricula + 1 : 1
     }
   }
-  
-  static get table () {
+
+  static get table() {
     return 'professores'
   }
 }

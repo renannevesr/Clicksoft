@@ -1,15 +1,15 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column,beforeSave } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, beforeSave } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Aluno extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column ()
+  @column()
   public nome: string
-  @column ()
+  @column()
   public email: string
-  @column ()
+  @column()
   public matricula: number
   @column.dateTime()
   public data_nascimento: DateTime
