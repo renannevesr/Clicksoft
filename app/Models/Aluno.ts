@@ -1,13 +1,5 @@
 import { DateTime } from 'luxon'
-import {
-  BaseModel,
-  column,
-  hasMany,
-  HasMany,
-  manyToMany,
-  ManyToMany,
-  beforeSave,
-} from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, manyToMany, ManyToMany, beforeSave } from '@ioc:Adonis/Lucid/Orm'
 import Sala from './Sala'
 export default class Aluno extends BaseModel {
   @column({ isPrimary: true })

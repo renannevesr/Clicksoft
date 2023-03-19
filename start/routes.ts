@@ -25,4 +25,8 @@ Route.group(() => {
   Route.resource('/professores', 'ProfessoresController').apiOnly()
   Route.resource('/salas', 'SalasController').apiOnly()
   Route.get('/alocacoes/:id/salas', 'AlocacoesController.indexSalas')
+  Route.delete(
+    '/alocacoes/:idAluno/salas/:idSala/professores/:idProfessor',
+    'AlocacoesController.remove'
+  )
 }).prefix('/api')
